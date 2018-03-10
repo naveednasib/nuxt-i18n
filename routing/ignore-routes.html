@@ -61,7 +61,7 @@
     <link rel="shortcut icon" href="../gitbook/images/favicon.ico" type="image/x-icon">
 
     
-    <link rel="next" href="../seo.html" />
+    <link rel="next" href="../browser-language-detection.html" />
     
     
     <link rel="prev" href="customize-routes.html" />
@@ -191,7 +191,20 @@
             
         </li>
     
-        <li class="chapter " data-level="1.5" data-path="../seo.html">
+        <li class="chapter " data-level="1.5" data-path="../browser-language-detection.html">
+            
+                <a href="../browser-language-detection.html">
+            
+                    
+                    Browser language detection
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6" data-path="../seo.html">
             
                 <a href="../seo.html">
             
@@ -204,7 +217,7 @@
             
         </li>
     
-        <li class="chapter " data-level="1.6" data-path="../lang-switcher.html">
+        <li class="chapter " data-level="1.7" data-path="../lang-switcher.html">
             
                 <a href="../lang-switcher.html">
             
@@ -217,7 +230,7 @@
             
         </li>
     
-        <li class="chapter " data-level="1.7" data-path="../lazy-load-translations.html">
+        <li class="chapter " data-level="1.8" data-path="../lazy-load-translations.html">
             
                 <a href="../lazy-load-translations.html">
             
@@ -230,25 +243,12 @@
             
         </li>
     
-        <li class="chapter " data-level="1.8" data-path="../options.html">
+        <li class="chapter " data-level="1.9" data-path="../options.html">
             
                 <a href="../options.html">
             
                     
                     Options
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="1.9" data-path="../configuration-example.html">
-            
-                <a href="../configuration-example.html">
-            
-                    
-                    Configuration Example
             
                 </a>
             
@@ -309,7 +309,8 @@
   modules<span class="token punctuation">:</span> <span class="token punctuation">[</span>
     <span class="token punctuation">[</span><span class="token string">&apos;nuxt-i18n&apos;</span><span class="token punctuation">,</span> <span class="token punctuation">{</span>
       ignorePaths<span class="token punctuation">:</span> <span class="token punctuation">[</span>
-        <span class="token string">&apos;/fr/notlocalized&apos;</span>
+        <span class="token string">&apos;/fr/notlocalized&apos;</span><span class="token punctuation">,</span>
+        <span class="token string">&apos;^/de.*&apos;</span> <span class="token comment" spellcheck="true">// You can also use a regex pattern</span>
       <span class="token punctuation">]</span>
     <span class="token punctuation">}</span><span class="token punctuation">]</span>
   <span class="token punctuation">]</span>
@@ -318,6 +319,8 @@
 <pre class="language-"><code>pages/
 &#x251C;&#x2500;&#x2500; fr/
 &#x251C;&#x2500;&#x2500;&#x2500;&#x2500; notlocalized.vue &lt;&#x2500;&#x2500; this page will be skipped when generating localized routes
+&#x251C;&#x2500;&#x2500; de/                &lt;&#x2013;- all routes starting with /de will be skipped as well
+&#x251C;&#x2500;&#x2500;&#x2500;&#x2500; index.vue
 </code></pre>
                                 
                                 </section>
@@ -351,7 +354,7 @@
                 </a>
                 
                 
-                <a href="../seo.html" class="navigation navigation-next " aria-label="Next page: SEO">
+                <a href="../browser-language-detection.html" class="navigation navigation-next " aria-label="Next page: Browser language detection">
                     <i class="fa fa-angle-right"></i>
                 </a>
                 
@@ -362,7 +365,7 @@
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"Ignore Routes","level":"1.4.3","depth":2,"next":{"title":"SEO","level":"1.5","depth":1,"path":"seo.md","ref":"seo.md","articles":[]},"previous":{"title":"Customize Routes","level":"1.4.2","depth":2,"path":"routing/customize-routes.md","ref":"routing/customize-routes.md","articles":[]},"dir":"ltr"},"config":{"plugins":["edit-link","prism","theme-vuejs-2","-fontsettings","github"],"root":"./docs","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"prism":{},"github":{"url":"https://github.com/nuxt-community/nuxt-i18n"},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"theme-vuejs-2":{},"highlight":{},"sharing":{"facebook":false,"twitter":false,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"edit-link":{"label":"Edit This Page","base":"https://github.com/nuxt-community/nuxt-i18n/tree/master/docs"},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"nuxt-i18n","links":{"sharing":{"facebook":false,"twitter":false}},"gitbook":">3.0.0"},"file":{"path":"routing/ignore-routes.md","mtime":"2018-02-20T23:59:59.000Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2018-02-21T01:43:31.714Z"},"basePath":"..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"Ignore Routes","level":"1.4.3","depth":2,"next":{"title":"Browser language detection","level":"1.5","depth":1,"path":"browser-language-detection.md","ref":"browser-language-detection.md","articles":[]},"previous":{"title":"Customize Routes","level":"1.4.2","depth":2,"path":"routing/customize-routes.md","ref":"routing/customize-routes.md","articles":[]},"dir":"ltr"},"config":{"plugins":["edit-link","prism","theme-vuejs-2","-fontsettings","github"],"root":"./docs","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"prism":{},"github":{"url":"https://github.com/nuxt-community/nuxt-i18n"},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"theme-vuejs-2":{},"highlight":{},"sharing":{"facebook":false,"twitter":false,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"edit-link":{"label":"Edit This Page","base":"https://github.com/nuxt-community/nuxt-i18n/tree/master/docs"},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"nuxt-i18n","links":{"sharing":{"facebook":false,"twitter":false}},"gitbook":">3.0.0"},"file":{"path":"routing/ignore-routes.md","mtime":"2018-03-10T22:22:06.000Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2018-03-10T22:43:50.318Z"},"basePath":"..","book":{"language":""}});
         });
     </script>
 </div>
