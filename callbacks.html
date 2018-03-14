@@ -4,7 +4,7 @@
     <head>
         <meta charset="UTF-8">
         <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
-        <title>Lazy-load translations · nuxt-i18n</title>
+        <title>Callbacks · nuxt-i18n</title>
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta name="description" content="">
         <meta name="generator" content="GitBook 3.2.3">
@@ -61,8 +61,10 @@
     <link rel="shortcut icon" href="gitbook/images/favicon.ico" type="image/x-icon">
 
     
+    <link rel="next" href="routing.html" />
     
-    <link rel="prev" href="lang-switcher.html" />
+    
+    <link rel="prev" href="basic-usage.html" />
     
 
     </head>
@@ -131,7 +133,7 @@
             
         </li>
     
-        <li class="chapter " data-level="1.4" data-path="callbacks.html">
+        <li class="chapter active" data-level="1.4" data-path="callbacks.html">
             
                 <a href="callbacks.html">
             
@@ -241,7 +243,7 @@
             
         </li>
     
-        <li class="chapter active" data-level="1.9" data-path="lazy-load-translations.html">
+        <li class="chapter " data-level="1.9" data-path="lazy-load-translations.html">
             
                 <a href="lazy-load-translations.html">
             
@@ -286,7 +288,7 @@
     <!-- Title -->
     <h1>
         <i class="fa fa-circle-o-notch fa-spin"></i>
-        <a href="." >Lazy-load translations</a>
+        <a href="." >Callbacks</a>
     </h1>
 </div>
 
@@ -301,41 +303,43 @@
     
                                 <section class="normal markdown-section">
                                 
-                                <h1 id="lazy-load-translations">Lazy-load translations</h1>
-<p>To prevent loading all translations at once, messages can be loaded asynchronously when a user loads the app or switches to another language. This can be done by setting option <code>loadLanguagesAsync</code> to <code>true</code> and by referencing your translations files in the <code>locales</code> option. Additionally, you might want to set the langDir option to match your files structure (defaults to <strong>lang/</strong>).</p>
-<p>Say your files are organized this way:</p>
-<pre class="language-"><code>nuxt/
-&#x251C;&#x2500;&#x2500; lang/
-&#x2502;   &#x251C;&#x2500;&#x2500; en-US.js
-&#x2502;   &#x251C;&#x2500;&#x2500; es-ES.js
-&#x2502;   &#x251C;&#x2500;&#x2500; fr-FR.js
-&#x251C;&#x2500;&#x2500; nuxt.config.js
-</code></pre><p>Your config could then reflect this files structure to let the module load messages from your translations files:</p>
-<pre class="language-"><code class="lang-js"><span class="token punctuation">{</span>
-  <span class="token punctuation">[</span><span class="token string">&apos;nuxt-i18n&apos;</span><span class="token punctuation">,</span> <span class="token punctuation">{</span>
-    locales<span class="token punctuation">:</span> <span class="token punctuation">[</span>
-      <span class="token punctuation">{</span>
-        code<span class="token punctuation">:</span> <span class="token string">&apos;en&apos;</span><span class="token punctuation">,</span>
-        iso<span class="token punctuation">:</span> <span class="token string">&apos;en-US&apos;</span><span class="token punctuation">,</span>
-        name<span class="token punctuation">:</span> <span class="token string">&apos;English&apos;</span><span class="token punctuation">,</span>
-        langFile<span class="token punctuation">:</span> <span class="token string">&apos;en-US.js&apos;</span>
-      <span class="token punctuation">}</span><span class="token punctuation">,</span>
-      <span class="token punctuation">{</span>
-        code<span class="token punctuation">:</span> <span class="token string">&apos;fr&apos;</span><span class="token punctuation">,</span>
-        iso<span class="token punctuation">:</span> <span class="token string">&apos;fr-FR&apos;</span><span class="token punctuation">,</span>
-        name<span class="token punctuation">:</span> <span class="token string">&apos;Fran&#xE7;ais&apos;</span><span class="token punctuation">,</span>
-        langFile<span class="token punctuation">:</span> <span class="token string">&apos;fr-FR.js&apos;</span>
-      <span class="token punctuation">}</span><span class="token punctuation">,</span>
-      <span class="token punctuation">{</span>
-        code<span class="token punctuation">:</span> <span class="token string">&apos;es&apos;</span><span class="token punctuation">,</span>
-        iso<span class="token punctuation">:</span> <span class="token string">&apos;es-ES&apos;</span><span class="token punctuation">,</span>
-        name<span class="token punctuation">:</span> <span class="token string">&apos;Espa&#xF1;ol&apos;</span><span class="token punctuation">,</span>
-        langFile<span class="token punctuation">:</span> <span class="token string">&apos;es-ES.js&apos;</span>
-      <span class="token punctuation">}</span>
-    <span class="token punctuation">]</span><span class="token punctuation">,</span>
-    loadLanguagesAsync<span class="token punctuation">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span>
-    langDir<span class="token punctuation">:</span> <span class="token string">&apos;lang/&apos;</span>
-  <span class="token punctuation">}</span><span class="token punctuation">]</span><span class="token punctuation">,</span>
+                                <h1 id="callbacks">Callbacks</h1>
+<p><strong>nuxt-i18n</strong> exposes some callbacks that you can use to perform specific tasks that depend on the app&apos;s language.</p>
+<h3 id="beforelanguageswitcholdlocale-newlocale"><code>beforeLanguageSwitch(oldLocale, newLocale)</code></h3>
+<p>Called right before setting the app&apos;s new locale.</p>
+<p>Parameters:</p>
+<ul>
+<li><strong>oldLocale</strong>: the app&apos;s locale before the switch</li>
+<li><strong>newLocale</strong>: the app&apos;s locale after the switch</li>
+</ul>
+<h3 id="onlanguageswitchedoldlocale-newlocale"><code>onLanguageSwitched(oldLocale, newLocale)</code></h3>
+<p>Called right after the app&apos;s locale has been switched.</p>
+<p>Parameters:</p>
+<ul>
+<li><strong>oldLocale</strong>: the app&apos;s locale before the switch</li>
+<li><strong>newLocale</strong>: the app&apos;s locale after the switch</li>
+</ul>
+<h2 id="usage">Usage</h2>
+<p>A typical usage would be to define those callbacks via a plugin where you can access the app&apos;s context (useful if you need to change Axios&apos; config when the language changes for example).</p>
+<pre class="language-"><code class="lang-es6">// ~/plugins/i18n.js
+
+export default function ({ app }) {
+  // beforeLanguageSwitch called right before setting a new locale
+  app.i18n.beforeLanguageSwitch = (oldLocale, newLocale) =&gt; {
+    console.log(oldLocale, newLocale)
+  }
+  // onLanguageSwitched called right after a new locale has been set
+  app.i18n.onLanguageSwitched = (oldLocale, newLocale) =&gt; {
+    console.log(oldLocale, newLocale)
+  }
+}
+</code></pre>
+<pre class="language-"><code class="lang-js"><span class="token comment" spellcheck="true">// nuxt.config.js</span>
+
+module<span class="token punctuation">.</span>exports <span class="token operator">=</span> <span class="token punctuation">{</span>
+  plugins<span class="token punctuation">:</span> <span class="token punctuation">[</span>
+    <span class="token punctuation">{</span> src<span class="token punctuation">:</span> <span class="token string">&apos;~plugins/i18n.js&apos;</span> <span class="token punctuation">}</span>
+  <span class="token punctuation">]</span>
 <span class="token punctuation">}</span>
 </code></pre>
 
@@ -366,10 +370,14 @@
 
             
                 
-                <a href="lang-switcher.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page: Lang Switcher">
+                <a href="basic-usage.html" class="navigation navigation-prev " aria-label="Previous page: Basic Usage">
                     <i class="fa fa-angle-left"></i>
                 </a>
                 
+                
+                <a href="routing.html" class="navigation navigation-next " aria-label="Next page: Routing">
+                    <i class="fa fa-angle-right"></i>
+                </a>
                 
             
         
@@ -378,7 +386,7 @@
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"Lazy-load translations","level":"1.9","depth":1,"previous":{"title":"Lang Switcher","level":"1.8","depth":1,"path":"lang-switcher.md","ref":"lang-switcher.md","articles":[]},"dir":"ltr"},"config":{"plugins":["edit-link","prism","theme-vuejs-2","-fontsettings","github"],"root":"./docs","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"prism":{},"github":{"url":"https://github.com/nuxt-community/nuxt-i18n"},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"theme-vuejs-2":{},"highlight":{},"sharing":{"facebook":false,"twitter":false,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"edit-link":{"label":"Edit This Page","base":"https://github.com/nuxt-community/nuxt-i18n/tree/master/docs"},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"nuxt-i18n","links":{"sharing":{"facebook":false,"twitter":false}},"gitbook":">3.0.0"},"file":{"path":"lazy-load-translations.md","mtime":"2018-02-21T00:05:41.000Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2018-03-14T16:04:36.972Z"},"basePath":".","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"Callbacks","level":"1.4","depth":1,"next":{"title":"Routing","level":"1.5","depth":1,"path":"routing.md","ref":"routing.md","articles":[{"title":"Basic Routing","level":"1.5.1","depth":2,"path":"routing/basic-routin.md","ref":"routing/basic-routin.md","articles":[]},{"title":"Customize Routes","level":"1.5.2","depth":2,"path":"routing/customize-routes.md","ref":"routing/customize-routes.md","articles":[]},{"title":"Ignore Routes","level":"1.5.3","depth":2,"path":"routing/ignore-routes.md","ref":"routing/ignore-routes.md","articles":[]}]},"previous":{"title":"Basic Usage","level":"1.3","depth":1,"path":"basic-usage.md","ref":"basic-usage.md","articles":[]},"dir":"ltr"},"config":{"plugins":["edit-link","prism","theme-vuejs-2","-fontsettings","github"],"root":"./docs","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"prism":{},"github":{"url":"https://github.com/nuxt-community/nuxt-i18n"},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"theme-vuejs-2":{},"highlight":{},"sharing":{"facebook":false,"twitter":false,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"edit-link":{"label":"Edit This Page","base":"https://github.com/nuxt-community/nuxt-i18n/tree/master/docs"},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"nuxt-i18n","links":{"sharing":{"facebook":false,"twitter":false}},"gitbook":">3.0.0"},"file":{"path":"callbacks.md","mtime":"2018-03-14T16:03:56.000Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2018-03-14T16:04:36.972Z"},"basePath":".","book":{"language":""}});
         });
     </script>
 </div>
