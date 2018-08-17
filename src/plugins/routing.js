@@ -18,6 +18,14 @@ function localePathFactory (i18nPath, routerPath) {
     const routesNameSeparator = '<%= options.routesNameSeparator %>'
     const name = route.name + routesNameSeparator + locale
     const localizedRoute = Object.assign({}, route, { name })
+    if (localizedRoute.i18nParams) {
+      localizedRoute.params = localizedRoute.params || {}
+      localizedRoute.params.nuxtI18n = {};
+      Object.keys(localizedRoute.i18nParams).forEach(i18nParamKey => {
+        localizedRoute.params[i18nParamKey] = this.$t(localizedRoute.i18nParams[i18nParamKey])
+        localizedRoute.params.nuxtI18n[i18nParamKey] = i18nParamKey;
+      });
+    }
 
     // Resolve localized route
     const router = this[routerPath]
@@ -39,11 +47,25 @@ function switchLocalePathFactory (i18nPath) {
   return function switchLocalePath (locale) {
     const LOCALE_DOMAIN_KEY = '<%= options.LOCALE_DOMAIN_KEY %>'
     const LOCALE_CODE_KEY = '<%= options.LOCALE_CODE_KEY %>'
+    const vuex = <%= JSON.stringify(options.vuex) %>
     const name = this.getRouteBaseName()
     if (!name) {
       return ''
     }
     const baseRoute = Object.assign({}, this.$route , { name })
+
+    // Retrieve localized fragments from vuex module
+    if (vuex) {
+      const { localePathParams } = this.$store.state[vuex.moduleName]
+      Object.keys(localePathParams).forEach(paramKey => {
+        if (typeof localePathParams[paramKey] === 'object') {
+          baseRoute.params[paramKey] = localePathParams[paramKey][locale];
+        } else if (typeof localePathParams[paramKey] === 'string') {
+          baseRoute.params[paramKey] = this[i18nPath].t(localePathParams[paramKey], locale)
+        }
+      })
+    }
+
     let path = this.localePath(baseRoute, locale)
 
     // Handle different domains

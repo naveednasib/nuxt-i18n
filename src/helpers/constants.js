@@ -40,7 +40,9 @@ export const DEFAULT_OPTIONS = {
     moduleName: 'i18n',
     mutations: {
       setLocale: 'I18N_SET_LOCALE',
-      setMessages: 'I18N_SET_MESSAGES'
+      setMessages: 'I18N_SET_MESSAGES',
+      setLocalePathParams: 'I18N_SET_LOCALE_PATH_PARAMS',
+      resetLocalePathParams: 'I18N_RESET_LOCALE_PATH_PARAMS'
     }
   },
   parsePages: true,

@@ -25,7 +25,8 @@ export default async ({ app, route, store, req }) => {
       namespaced: true,
       state: () => ({
         locale: '',
-        messages: {}
+        messages: {},
+        localePathParams: {},
       }),
       actions: {
         setLocale ({ commit }, locale) {
@@ -33,6 +34,22 @@ export default async ({ app, route, store, req }) => {
         },
         setMessages ({ commit }, messages) {
           commit(vuex.mutations.setMessages, messages)
+        },
+        setLocalePathParams ({ commit }, params) {
+          console.log('setLocalePathParams')
+          return new Promise(resolve => {
+            commit(vuex.mutations.setLocalePathParams, params)
+            console.log('resolve')
+            resolve()
+          })
+        },
+        resetLocalePathParams ({ commit }) {
+          console.log('resetLocalePathParams')
+          return new Promise(resolve => {
+            commit(vuex.mutations.resetLocalePathParams)
+            console.log('resolve')
+            resolve()
+          })
         }
       },
       mutations: {
@@ -41,6 +58,12 @@ export default async ({ app, route, store, req }) => {
         },
         [vuex.mutations.setMessages] (state, messages) {
           state.messages = messages
+        },
+        [vuex.mutations.setLocalePathParams] (state, params) {
+          state.localePathParams = params
+        },
+        [vuex.mutations.resetLocalePathParams] (state) {
+          state.localePathParams = {}
         }
       }
     })
